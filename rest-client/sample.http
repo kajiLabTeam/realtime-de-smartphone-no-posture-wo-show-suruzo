@@ -1,0 +1,44 @@
+POST http://127.0.0.1:8000/api/raw HTTP/1.1
+content-type: application/json
+
+[
+  {
+    "timestamp": 1234567890.123456,
+    "acceleration": {
+      "x": 0,
+      "y": 0,
+      "z": 9.8
+    },
+    "gyroscope": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    }
+  },
+  {
+    "timestamp": 1234567891.123456,
+    "acceleration": {
+      "x": 0,
+      "y": 0,
+      "z": 9.8
+    },
+    "gyroscope": {
+      "x": 1,
+      "y": 0,
+      "z": 0
+    }
+  },
+  {
+    "timestamp": 1234567892.123456,
+    "acceleration": {
+      "x": 0,
+      "y": 0,
+      "z": 9.8
+    },
+    "gyroscope": {
+      "x": 2,
+      "y": 0,
+      "z": 0
+    }
+  }
+]
