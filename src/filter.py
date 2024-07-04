@@ -7,11 +7,11 @@ class FilterBase:
     フィルターの基底クラス
     """
 
-    current_quaternion: Quaternion = [1.0, 0.0, 0.0, 0.0]
+    last_quaternion: Quaternion = [1.0, 0.0, 0.0, 0.0]
 
     def __init__(self, initQuaternion: Quaternion = None) -> None:
         if initQuaternion is not None:
-            self.current_quaternion = initQuaternion
+            self.last_quaternion = initQuaternion
 
     def update(self, sensorData: SensorData) -> List[Quaternion]:
         """
@@ -29,9 +29,9 @@ class SampleFilter(FilterBase):
         """
         フィルターのサンプル. 3度ずつ回転する動作を返す
         """
-        q = self.current_quaternion
+        q = self.last_quaternion
         print(q)
         new_quaternion = [[q[0] + i, q[1], q[2], q[3]] for i in range(len(sensorData))]
-        self.current_quaternion = new_quaternion[-1]
+        self.last_quaternion = new_quaternion[-1]
 
         return new_quaternion
