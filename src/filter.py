@@ -1,6 +1,5 @@
 from typing import List
-from src.type import FrameData, Quaternion, SensorData
-import math
+from src.type import Quaternion, SensorData
 
 
 class FilterBase:
@@ -30,4 +29,9 @@ class SampleFilter(FilterBase):
         """
         フィルターのサンプル. 3度ずつ回転する動作を返す
         """
-        return [[0, math.pi / 60 * i, 0] for i in range(len(sensorData))]
+        q = self.current_quaternion
+        print(q)
+        new_quaternion = [[q[0] + i, q[1], q[2], q[3]] for i in range(len(sensorData))]
+        self.current_quaternion = new_quaternion[-1]
+
+        return new_quaternion
