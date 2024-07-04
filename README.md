@@ -16,3 +16,10 @@ uvicorn main:app --reload
 ```bash
 uvicorn main:app
 ```
+
+## ファイル構成
+- `main.py`: FastAPI のエンドポイントと処理を定義
+- `src/`
+  - `wsManager.py`: WebSocket の管理
+  - `filter.py`: フィルタ処理
+  - `type.py`: 型定義 & バリデーション
