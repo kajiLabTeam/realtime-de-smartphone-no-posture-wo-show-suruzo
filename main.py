@@ -1,14 +1,16 @@
-from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
-from fastapi.responses import HTMLResponse
 import json
 
-from src.filter import SampleFilter
+from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
+from fastapi.responses import HTMLResponse
+
+from src.filter import MadgwickFilter, SampleFilter
 from src.type import validate_sensor_data
 from src.wsManager import WSManager
 
 app = FastAPI()
 manager = WSManager()
-filter = SampleFilter()
+#filter = SampleFilter()
+filter = MadgwickFilter()
 
 
 @app.api_route("/", methods=["GET", "POST"])
