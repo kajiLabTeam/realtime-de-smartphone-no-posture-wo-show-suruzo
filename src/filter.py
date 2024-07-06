@@ -1,4 +1,7 @@
 from typing import List
+
+from ahrs.filters import Madgwick
+
 from src.type import Quaternion, SensorData
 
 
@@ -32,6 +35,32 @@ class SampleFilter(FilterBase):
         q = self.last_quaternion
         print(q)
         new_quaternion = [[q[0] + i, q[1], q[2], q[3]] for i in range(len(sensorData))]
+        self.last_quaternion = new_quaternion[-1]
+
+        return new_quaternion
+
+
+class MadgwickFilter(FilterBase):
+    """
+    読み方わからんフィルター
+    """
+
+    def update(self, sensorData: SensorData) -> List[Quaternion]:
+        sampling_rate = 100  # デフォ値
+        madgwick = Madgwick(frequency=sampling_rate, gain_imu=0.33)
+        q = self.last_quaternion
+        print(q)
+        # 各センサーデータに対してクォータニオンを更新し、リストに追加
+        for data in sensorData:
+            q = madgwick.updateIMU(
+                q=q,
+                gyr=[data.gyroscope.x, data.gyroscope.y, data.gyroscope.z],
+                acc=[data.acceleration.x, data.acceleration.y, data.acceleration.z],
+            )
+            new_quaternion = [[q[0], q[1], q[2], q[3]]]
+
+            print(new_quaternion)
+
         self.last_quaternion = new_quaternion[-1]
 
         return new_quaternion
