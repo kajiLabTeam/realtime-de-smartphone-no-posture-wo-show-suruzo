@@ -57,16 +57,16 @@ class MadgwickFilter(FilterBase):
         q = self.last_quaternion
         print(q)
         # 各センサーデータに対してクォータニオンを更新し、リストに追加
+        quaternions = []
         for data in sensorData:
             q = madgwick.updateIMU(
                 q=q,
                 gyr=[data.gyroscope.x, data.gyroscope.y, data.gyroscope.z],
                 acc=[data.acceleration.x, data.acceleration.y, data.acceleration.z],
             )
-            new_quaternion = [[q[0], q[1], q[2], q[3]]]
+            # new_quaternion = [q[0], q[1], q[2], q[3]]
+            quaternions.append([q[0], q[1], q[2], q[3]])
 
-            print(new_quaternion)
+        self.last_quaternion = quaternions[-1]
 
-        self.last_quaternion = new_quaternion[-1]
-
-        return new_quaternion
+        return quaternions
