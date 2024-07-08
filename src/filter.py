@@ -16,13 +16,13 @@ class FilterBase:
         if initQuaternion is not None:
             self.last_quaternion = initQuaternion
 
-    def init(self, initQuaternion: Quaternion) -> None:
+    def init(self, initQuaternion: Quaternion = [1.0, 0.0, 0.0, 0.0]) -> None:
         """
         フィルターの初期化処理
         """
         self.last_quaternion = initQuaternion
 
-    def update(self, sensorData: SensorData = [1.0, 0.0, 0.0, 0.0]) -> List[Quaternion]:
+    def update(self, sensorData: SensorData) -> List[Quaternion]:
         """
         フィルターの更新処理
         """
