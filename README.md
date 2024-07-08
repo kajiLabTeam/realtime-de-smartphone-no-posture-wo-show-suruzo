@@ -14,7 +14,7 @@ uvicorn main:app --reload
 
 ### 本番環境
 ```bash
-uvicorn main:app
+uvicorn main:app --host 0.0.0.0
 ```
 
 ## ファイル構成

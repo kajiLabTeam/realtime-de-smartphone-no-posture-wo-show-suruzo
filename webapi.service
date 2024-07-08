@@ -1,0 +1,13 @@
+[Unit]
+Description=auto start webapi
+After=network-online.target
+ConditionPathExists=/home/tada/realtime-zou
+
+[Service]
+ExecStart=/home/tada/realtime-zou/start.sh
+Restart=no
+Type=simple
+
+
+[Install]
+WantedBy=multi-user.target
