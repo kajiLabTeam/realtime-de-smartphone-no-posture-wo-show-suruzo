@@ -40,6 +40,17 @@ async def post_raw_data(req: Request):
     return response_data
 
 
+@app.get("/api/init")
+async def post_raw_data():
+    """
+    HTTP GET で初期化リクエストを受け取り、フィルターの初期化を行う
+    """
+
+    filter.init()
+
+    return {"message": "Initialized"}
+
+
 @app.websocket("/ws/posture")
 async def websocket_endpoint(websocket: WebSocket):
     """
