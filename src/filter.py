@@ -22,7 +22,7 @@ class FilterBase:
         """
         self.last_quaternion = initQuaternion
 
-    def update(self, sensorData: SensorData) -> List[Quaternion]:
+    def update(self, sensorData: SensorData = [1.0, 0.0, 0.0, 0.0]) -> List[Quaternion]:
         """
         フィルターの更新処理
         """
