@@ -1,15 +1,26 @@
 import json
 
 from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 
 from src.filter import MadgwickFilter
 from src.type import validate_sensor_data
 from src.wsManager import WSManager
 
+
 app = FastAPI()
 manager = WSManager()
 filter = MadgwickFilter()
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins="*",
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.api_route("/", methods=["GET", "POST"])
